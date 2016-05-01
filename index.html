@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="style\all.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+  <div class="container" ng-app="mathApp" ng-controller="QuizCtrl as quiz">
+    <div class="top">
+      {{quiz.current}}/{{quiz.questions.length}}
+      <progress max="25" value="1">
+      </progress>
+      {{quiz.time}}
+    </div>
+    <div class="content">
+      <div class="problem-outer">
+        <div class="problem">
+          <div class="number1">
+            {{quiz.questions[quiz.current].number1}}
+          </div>
+          <div class="row">
+            <span class="operator">
+                {{quiz.questions[quiz.current].operator}}
+            </span>
+            <span class="number2">
+                {{quiz.questions[quiz.current].number2}}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+      <div class="options">
+        <button class="option" ng-repeat="option in quiz.questions[quiz.current].options">
+          {{option}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="js/all.js"></script>
+</body>
+
+</html>
