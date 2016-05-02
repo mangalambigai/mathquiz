@@ -2,45 +2,17 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="style\all.css">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="style\all.css">
 </head>
 
-<body>
-  <div class="container" ng-app="mathApp" ng-controller="QuizCtrl as quiz">
-    <div class="top">
-      {{quiz.current}}/{{quiz.questions.length}}
-      <progress max="25" value="1">
-      </progress>
-      {{quiz.time}}
-    </div>
-    <div class="content">
-      <div class="problem-outer">
-        <div class="problem">
-          <div class="number1">
-            {{quiz.questions[quiz.current].number1}}
-          </div>
-          <div class="row">
-            <span class="operator">
-                {{quiz.questions[quiz.current].operator}}
-            </span>
-            <span class="number2">
-                {{quiz.questions[quiz.current].number2}}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-      <div class="options">
-        <button class="option" ng-repeat="option in quiz.questions[quiz.current].options">
-          {{option}}
-        </button>
-      </div>
-    </div>
+<body ng-app="mathApp">
+  <div class="container" ng-view>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
   <script src="js/all.js"></script>
 </body>
 

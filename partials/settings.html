@@ -1,0 +1,36 @@
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="questionCount" class="col-sm-6 control-label">How many questions do you want?</label>
+    <div class="col-sm-6">
+      <input type="number" class="form-control" id="questionCount" ng-model="settings.questionCount" min="1" max="100">
+    </div>
+  </div>
+
+  <fieldset ng-repeat="operation in settings.operationList">
+    <legend>{{operation.name}}</legend>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <input type="checkbox" ng-model="operation.enabled">
+        Would you like to include {{operation.name}}?
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="addition" class="col-sm-6 control-label">Minimum number</label>
+      <div class="col-sm-6">
+        <input type="number" id="addMin" ng-model="operation.minimum" class="form-control" min="0" max="1000">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="addition" class="col-sm-6 control-label">Maximum number</label>
+      <div class="col-sm-6">
+        <input type="number" id="addition" ng-model="operation.maximum" class="form-control" min="0" max="1000">
+      </div>
+    </div>
+  </fieldset>
+
+  <button ng-click="settings.save()">Save</button>
+  <a href="#/home"><button>Cancel</button></a>
+
+</form>

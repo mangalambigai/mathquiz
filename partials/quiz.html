@@ -1,0 +1,31 @@
+<div class="score">
+  {{quiz.current}}/{{quiz.questions.length}}
+  <progress max="25" value="1">
+  </progress>
+  {{quiz.time}}
+</div>
+<div class="content">
+  <div class="problem-outer">
+    <div class="problem">
+      <div class="number1">
+        {{quiz.questions[quiz.current].number1}}
+      </div>
+      <div class="secondrow">
+        <span class="operator">
+            {{quiz.questions[quiz.current].operator}}
+        </span>
+        <span class="number2">
+            {{quiz.questions[quiz.current].number2}}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="options">
+    <button class="option" ng-repeat="option in quiz.questions[quiz.current].options"
+    ng-click="quiz.optionClicked()">
+      {{option}}
+    </button>
+  </div>
+</div>
