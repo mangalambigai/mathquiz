@@ -17,7 +17,7 @@ angular.module('mathApp')
         var operindex = Math.floor(Math.random()*allowedOperations.length);
         var oper = allowedOperations[operindex];
         //choose operation
-        question.operation = oper.operation;
+        question.operator = oper.operation;
         //choose numbers
         question.number1 = Math.floor(Math.random()*(oper.maximum - oper.minimum))
              + oper.minimum;
