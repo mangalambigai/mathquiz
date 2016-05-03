@@ -1,7 +1,11 @@
 <div class="score">
   {{quiz.current}}/{{quiz.questions.length}}
-  <progress max="25" value="1">
-  </progress>
+  <!--progress max="25" value="1">
+  </progress-->
+  <uib-progress class="progress" max="quiz.questions.length">
+    <uib-bar ng-repeat="bar in quiz.scores track by $index" value="bar.value" type="{{bar.type}}">
+    </uib-bar>
+  </uib-progress>
   {{quiz.time}}
 </div>
 <div class="content">
@@ -24,7 +28,7 @@
   <hr>
   <div class="options">
     <button class="option" ng-repeat="option in quiz.questions[quiz.current].options"
-    ng-click="quiz.optionClicked()">
+    ng-click="quiz.optionClicked(option)">
       {{option}}
     </button>
   </div>

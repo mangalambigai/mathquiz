@@ -89,12 +89,20 @@ angular.module('mathApp')
         }
     };
 
+    //TODO: handle elapsed time
     this.time = "00:00";
     this.getQuestions();
+    this.scores=[];
 
     //on button clicked
-    this.optionClicked = function () {
-        this.current++;
+    this.optionClicked = function (value) {
+        if (value == this.questions[this.current].answer)
+            this.scores.push({type: 'success', value: 1});
+        else
+            this.scores.push({type: 'danger', value: 1});
+        if (this.current < this.questions.length-1)
+            this.current++;
+        //TODO: handle else - quiz finished
     };
 
 }]);
