@@ -6,7 +6,7 @@
     <uib-bar ng-repeat="bar in quiz.scores track by $index" value="bar.value" type="{{bar.type}}">
     </uib-bar>
   </uib-progress>
-  {{quiz.time}}
+  <timer interval="1000">{{hhours}}:{{mminutes}}:{{sseconds}}</timer>
 </div>
 <div class="content">
   <div class="problem-outer">
