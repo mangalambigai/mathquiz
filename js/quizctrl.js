@@ -99,6 +99,7 @@ angular.module('mathApp')
     };
     //on button clicked
     this.optionClicked = function (value) {
+        vm.disableOptions = true;
         if (value == this.questions[this.current].answer) {
             this.scores.push({type: 'success', value: 1});
             // say correct
@@ -115,14 +116,15 @@ angular.module('mathApp')
 
         vm.speechanswer.onend = function(e) {
             $scope.$apply(function() {
-	            if (vm.current < vm.questions.length-1) {
-	                vm.current++;
-	                //TODO: speak the question
-	                vm.speakCurrentQuestion();
-	            }
-	            else {
-	                //TODO: handle else - quiz finished
-	            }
+                if (vm.current < vm.questions.length-1) {
+                    vm.current++;
+                    vm.disableOptions = false;
+                    // speak the question
+                    vm.speakCurrentQuestion();
+                }
+                else {
+                    //TODO: handle else - quiz finished
+                }
             });
         }
 
