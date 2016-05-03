@@ -1,8 +1,9 @@
 angular.module('mathApp')
-.controller('QuizCtrl', ['settings', function (settings) {
+.controller('QuizCtrl', ['settings', '$scope', function (settings, $scope) {
     vm = this;
-    this.current = 1;
     this.questions = [];
+    this.speechquestion = new SpeechSynthesisUtterance();
+    this.speechanswer = new SpeechSynthesisUtterance();
 
     this.shuffle = function (arr) {
         var len = arr.length;
@@ -39,8 +40,7 @@ angular.module('mathApp')
         settings.operationList.forEach(function (oper) {
             if (oper.enabled) {
                 allowedOperations.push(oper);
-                if (oper.operation == '+' || oper.operation ==
-                    'x') {
+                if (oper.operation == '+' || oper.operation == 'x') {
                     oper.answerminimum = vm.exec(oper.operation,
                         oper.minimum, oper.minimum);
                     oper.answermaximum = vm.exec(oper.operation,
@@ -64,6 +64,7 @@ angular.module('mathApp')
 
             //choose operation
             question.operator = oper.operation;
+            question.operatorText = oper.text;
             //choose numbers
             question.number1 = Math.floor(Math.random() * (oper
                     .maximum - oper.minimum)) +
@@ -89,20 +90,49 @@ angular.module('mathApp')
         }
     };
 
-    //TODO: handle elapsed time
-    this.time = "00:00";
-    this.getQuestions();
-    this.scores=[];
-
+    //speak the current question
+    this.speakCurrentQuestion = function() {
+        vm.speechquestion.text = ' '+ this.questions[this.current].number1 +
+            this.questions[this.current].operatorText +
+            this.questions[this.current].number2;
+        window.speechSynthesis.speak(vm.speechquestion);
+    };
     //on button clicked
     this.optionClicked = function (value) {
-        if (value == this.questions[this.current].answer)
+        if (value == this.questions[this.current].answer) {
             this.scores.push({type: 'success', value: 1});
-        else
+            // say correct
+            vm.speechanswer.text = 'Correct';
+        }
+        else {
             this.scores.push({type: 'danger', value: 1});
-        if (this.current < this.questions.length-1)
-            this.current++;
-        //TODO: handle else - quiz finished
+            //say wrong
+            vm.speechanswer.text = 'No, '+ this.questions[this.current].number1 +
+                this.questions[this.current].operatorText +
+                this.questions[this.current].number2 + ' is ' +
+                this.questions[this.current].answer;
+        }
+
+        vm.speechanswer.onend = function(e) {
+            $scope.$apply(function() {
+	            if (vm.current < vm.questions.length-1) {
+	                vm.current++;
+	                //TODO: speak the question
+	                vm.speakCurrentQuestion();
+	            }
+	            else {
+	                //TODO: handle else - quiz finished
+	            }
+            });
+        }
+
+        window.speechSynthesis.speak(vm.speechanswer);
+
     };
+    this.getQuestions();
+    this.current = 0;
+    this.speakCurrentQuestion();
+    this.scores=[];
+
 
 }]);

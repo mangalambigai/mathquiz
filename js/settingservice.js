@@ -7,21 +7,24 @@ angular.module('mathApp')
             name: 'addition',
             enabled: true,
             minimum: 0,
-            maximum: 10
+            maximum: 10,
+            text: ' plus '
         },
         {
             operation: '-',
             name: 'subtraction',
             enabled: true,
             minimum: 0,
-            maximum: 10
+            maximum: 10,
+            text: ' minus '
        },
        {
             operation: 'x',
             name: "multiplication",
             enabled: true,
             minimum: 0,
-            maximum: 10
+            maximum: 10,
+            text: ' times '
         }]
     };
     return settings;
