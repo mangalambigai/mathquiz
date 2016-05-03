@@ -7,7 +7,7 @@ var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
 var sass = require('gulp-sass');
 
-gulp.task('default', ['copy-html', 'copy-data', 'copy-manifest', 'copy-bower',
+gulp.task('default', ['copy-html', 'copy-data', 'copy-manifest', 'copy-bower','copy-img',
     'styles', 'lint', 'scripts'
 ], function () {
     gulp.watch('js/**/*.js', ['lint', 'scripts']);
@@ -30,6 +30,7 @@ gulp.task('dist', [
     'copy-html',
     'copy-bower',
     'copy-data',
+    'copy-img',
     'styles',
     'lint',
     'scripts-dist'
@@ -68,6 +69,11 @@ gulp.task('copy-html', function () {
 gulp.task('copy-bower', function () {
     gulp.src('bower_components/**/*')
         .pipe(gulp.dest('./dist/bower_components'));
+});
+
+gulp.task('copy-img', function () {
+    gulp.src('img/**/*')
+        .pipe(gulp.dest('./dist/img'));
 });
 
 gulp.task('copy-manifest', function () {
