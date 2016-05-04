@@ -1,5 +1,6 @@
 angular.module('mathApp')
-.controller('QuizCtrl', ['settings', '$scope', function (settings, $scope) {
+.controller('QuizCtrl', ['settings', '$scope', '$uibModal', '$location',
+    function (settings, $scope, $uibModal, $location) {
     vm = this;
     this.questions = [];
     this.speechquestion = new SpeechSynthesisUtterance();
@@ -103,6 +104,7 @@ angular.module('mathApp')
         vm.flashAnswer = true;
         if (value == this.questions[this.current].answer) {
             this.scores.push({type: 'success', value: 1});
+            this.correct++;
             // say correct
             vm.speechanswer.text = 'Correct';
             vm.showcheck = true;
@@ -111,6 +113,7 @@ angular.module('mathApp')
             this.scores.push({type: 'danger', value: 1});
             //say wrong
             vm.showcross = true;
+            vm.review.push(this.questions[this.current]);
             vm.speechanswer.text = 'No, '+ this.questions[this.current].number1 +
                 this.questions[this.current].operatorText +
                 this.questions[this.current].number2 + ' is ' +
@@ -130,6 +133,7 @@ angular.module('mathApp')
                 }
                 else {
                     //TODO: handle else - quiz finished
+                    vm.showResults();
                 }
             });
         }
@@ -137,10 +141,42 @@ angular.module('mathApp')
         window.speechSynthesis.speak(vm.speechanswer);
 
     };
-    this.getQuestions();
-    this.current = 0;
-    this.speakCurrentQuestion();
-    this.scores=[];
 
+    this.startQuiz = function() {
+        this.flashAnswer = false;
+        this.disableOptions = false;
+        this.current = 0;
+        this.correct = 0;
+        this.speakCurrentQuestion();
+        this.scores=[];
+        this.review=[];
+    };
+
+    this.showResults = function() {
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'partials/results.html',
+            controller: 'ResultsCtrl',
+            controllerAs: 'results',
+            size: 'lg',
+            resolve: {
+                items: function() {return [vm.correct,
+                vm.questions.length,
+                 vm.review]}
+            }
+        });
+
+        modalInstance.result.then(function (redo) {
+            if (redo)
+                vm.startQuiz();
+            else
+                $location.path('#/home');
+        }, function () {
+            $location.path('#/home');
+        });
+    };
+
+    this.getQuestions();
+    this.startQuiz();
 
 }]);

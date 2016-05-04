@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h3 class="modal-title">Quiz results</h3>
+</div>
+<div class="modal-body">
+    <h4>You answered {{results.correct}} of {{results.count}} questions correctly!</h4>
+    <p ng-if="results.review.length">Please review the following:</p>
+    <ul>
+        <li ng-repeat="item in results.review">
+            {{item.number1}}{{item.operator}}{{item.number2}}={{item.answer}}
+        </li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-click="redo()">Redo</button>
+    <button type="button" ng-click="home()">Home</button>
+</div>

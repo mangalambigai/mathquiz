@@ -121,3 +121,15 @@ button {
 button:hover {
   background-color: #232;
 }
+
+.modal-header, .modal-body, .modal-footer {
+  font-family: cursive;
+  background-color: #454;
+  color: white;
+}
+
+.modal-dialog {
+  border: 20px solid #ccb089;
+  border-image-source: url('../img/wooden_frame.jpg');
+  border-image-slice: 50 65;
+}
