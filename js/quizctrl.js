@@ -100,14 +100,17 @@ angular.module('mathApp')
     //on button clicked
     this.optionClicked = function (value) {
         vm.disableOptions = true;
+        vm.flashAnswer = true;
         if (value == this.questions[this.current].answer) {
             this.scores.push({type: 'success', value: 1});
             // say correct
             vm.speechanswer.text = 'Correct';
+            vm.showcheck = true;
         }
         else {
             this.scores.push({type: 'danger', value: 1});
             //say wrong
+            vm.showcross = true;
             vm.speechanswer.text = 'No, '+ this.questions[this.current].number1 +
                 this.questions[this.current].operatorText +
                 this.questions[this.current].number2 + ' is ' +
@@ -116,7 +119,10 @@ angular.module('mathApp')
 
         vm.speechanswer.onend = function(e) {
             $scope.$apply(function() {
+                vm.showcross = false;
+                vm.showcheck = false;
                 if (vm.current < vm.questions.length-1) {
+                    vm.flashAnswer = false;
                     vm.current++;
                     vm.disableOptions = false;
                     // speak the question

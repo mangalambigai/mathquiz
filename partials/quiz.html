@@ -23,11 +23,17 @@
         </span>
       </div>
     </div>
+    <div class="checkmark" ng-show="quiz.showcheck">
+      ✓
+    </div>
+    <div class="cross" ng-show="quiz.showcross">
+      ✗
+    </div>
   </div>
 
   <hr>
   <div class="options">
-    <button class="option" ng-repeat="option in quiz.questions[quiz.current].options"
+    <button class="option" ng-class="{'flash-answer': quiz.flashAnswer && option == quiz.questions[quiz.current].answer}" ng-repeat="option in quiz.questions[quiz.current].options"
     ng-click="quiz.optionClicked(option)" ng-disabled="quiz.disableOptions">
       {{option}}
     </button>

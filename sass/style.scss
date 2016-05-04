@@ -67,6 +67,22 @@ body {
       }
     }
 
+    .checkmark {
+      position: fixed;
+      left: 60%;
+      font-size: 10em;
+      font-weight: bold;
+      color: yellowgreen;
+    }
+
+    .cross {
+      position: fixed;
+      left: 60%;
+      font-size: 10em;
+      font-weight: bold;
+      color: red;
+    }
+
     hr {
       border: solid 2px white;
     }
@@ -75,6 +91,9 @@ body {
       flex-wrap: wrap;
       display: flex;
 
+      .flash-answer {
+        background-color: yellowgreen;
+      }
     }
   }
 
