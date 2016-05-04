@@ -1,0 +1,9 @@
+{
+  "name": "mathquiz",
+  "version": "0.1.0",
+  "dependencies": {
+    "angular-timer": "latest",
+    "humanize-duration": "latest",
+    "momentjs": "latest"
+  }
+}
