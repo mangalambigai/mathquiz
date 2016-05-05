@@ -1,4 +1,4 @@
-angular.module('mathApp', ['ngRoute', 'ui.bootstrap', 'timer'])
+angular.module('mathApp', ['ngRoute', 'ui.bootstrap'])
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider
     .when('/quiz', {

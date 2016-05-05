@@ -1,12 +1,10 @@
 <div class="score">
   {{quiz.current}}/{{quiz.questions.length}}
-  <!--progress max="25" value="1">
-  </progress-->
   <uib-progress class="progress" max="quiz.questions.length">
     <uib-bar ng-repeat="bar in quiz.scores track by $index" value="bar.value" type="{{bar.type}}">
     </uib-bar>
   </uib-progress>
-  <timer interval="1000">{{hhours}}:{{mminutes}}:{{sseconds}}</timer>
+  <timer state="quiz.timerstate"></timer>
 </div>
 <div class="content">
   <div class="problem-outer">

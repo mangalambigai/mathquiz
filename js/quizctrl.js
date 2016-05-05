@@ -100,6 +100,7 @@ angular.module('mathApp')
     };
     //on button clicked
     this.optionClicked = function (value) {
+        vm.timerstate = 'stop';
         vm.disableOptions = true;
         vm.flashAnswer = true;
         if (value == this.questions[this.current].answer) {
@@ -130,6 +131,7 @@ angular.module('mathApp')
                     vm.disableOptions = false;
                     // speak the question
                     vm.speakCurrentQuestion();
+                    vm.timerstate = 'start';
                 }
                 else {
                     //TODO: handle else - quiz finished
@@ -150,6 +152,7 @@ angular.module('mathApp')
         this.speakCurrentQuestion();
         this.scores=[];
         this.review=[];
+        vm.timerstate = 'start';
     };
 
     this.showResults = function() {
