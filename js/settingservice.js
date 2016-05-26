@@ -1,10 +1,11 @@
 angular.module('mathApp')
 .factory('settings', function() {
+    //TODO: read this from local storage
     var settings= {
         questionCount: 25,
         operationList:[{
             operation: '+',
-            name: 'addition',
+            name: 'Addition',
             enabled: true,
             minimum: 0,
             maximum: 10,
@@ -12,7 +13,7 @@ angular.module('mathApp')
         },
         {
             operation: '-',
-            name: 'subtraction',
+            name: 'Subtraction',
             enabled: true,
             minimum: 0,
             maximum: 10,
@@ -20,7 +21,7 @@ angular.module('mathApp')
        },
        {
             operation: 'x',
-            name: "multiplication",
+            name: "Multiplication",
             enabled: true,
             minimum: 0,
             maximum: 10,
